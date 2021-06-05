@@ -105,9 +105,9 @@ def train(model, time_slices):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	# Flag for reading and processing midi files
-	parser.add_argument('-r', action='store_true')
+	parser.add_argument('-r', action='store_true', help='A flag for doing preprocessing on all MIDI files in the "midi" folder')
 	# Flag for continuing training
-	parser.add_argument('-c', action='store_true')
+	parser.add_argument('-c', action='store_true', help='A flag for continuing training off of "weights.hdf5"')
 	
 	args = parser.parse_args()
 	
