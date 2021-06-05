@@ -1,11 +1,13 @@
-import common as c
-import emotions_data
 import argparse
 import pickle
+import os
+
+import common as c
+import emotions_data
+
 import numpy as np
 from music21 import *
 
-NUM_MEASURES_TO_GENERATE = 20
 
 def read_midi_data(file):
 	'''
@@ -69,7 +71,6 @@ def generate_notes(model, time_slices, min_percent_for_activation, desired_emoti
 	
 	prediction_output = []
 		
-	# generate NUM_MEASURES_TO_GENERATE measures
 	for note_index in range(duration):
 		# prediction_input shape is 1 x SEQUENCE_LENGTH x NUM_FEATURES
 		prediction_input = np.reshape(pattern, (1, c.SEQUENCE_LENGTH, c.NUM_FEATURES))
@@ -136,6 +137,10 @@ def create_midi(prediction_output, file_name):
 		offset += 1/c.TIME_SLICE_STEP
 
 	midi_stream = stream.Stream(output_notes)
+	
+	# Create output folder if it doesn't exist
+	if not os.path.exists('output'):
+		os.makedirs('output')
 
 	midi_stream.write('midi', fp='output/' + file_name + '.mid')
 	
