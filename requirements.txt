@@ -1,0 +1,4 @@
+music21==6.7.1
+numpy==1.19.5
+keras_nightly==2.5.0.dev2021032900
+keras==2.4.3
