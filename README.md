@@ -82,7 +82,7 @@ Duration is in number of time slices, which by default is a 16th beat. So a dura
 
 Output file name is for the file name of the generated MIDI file. Outputs are stored in the "output" folder.
 
-Input file name is the only optional prompt and can be used to initialize the model's state on a specific MIDI file such that the output will try to be a continuance of the input MIDI. Whether the output MIDI continues off the start or the end of the input MIDI is determined by the --use_start and --use_end flags.
+Input file name is the only optional prompt and can be used to initialize the model's state on a specific MIDI file such that the output will try to be a continuance of the input MIDI. Whether the output MIDI continues off the start or the end of the input MIDI is determined by the --use_start and --use_end flags. If the input file name is not specified, the model's initial state will instead be a random continuous part of the preprocessed MIDI files in "data/midi_data".
 
 
 All of these prompts can also be specified as command-line options. Check
@@ -90,6 +90,9 @@ All of these prompts can also be specified as command-line options. Check
 python predictor.py -h
 ```
 for more information.
+
+
+Sometimes the generated MIDI will be a lot shorter than the inputted duration (or even empty). This is because sometimes the model gets stuck in a feedback loop where the output time slice is always very few or no notes played and makes a large portion of the song be empty. Increasing complexity will lower the chances of this happening.
 
 # Notes and Possibe Improvements
 
